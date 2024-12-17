@@ -1,0 +1,24 @@
+﻿<Project Sdk="Microsoft.NET.Sdk">
+
+	<Import Project="..\..\..\common.props" />
+	<Import Project="..\..\..\configureawait.props" />
+	<Import Project="..\..\..\packing.props" />
+
+	<PropertyGroup>
+		<TargetFramework>net9.0</TargetFramework>
+		<RootNamespace>Syrna.AuditLogging</RootNamespace>
+		<IsPackable>false</IsPackable>
+	</PropertyGroup>
+
+	<ItemGroup>
+		<Compile Remove="EntityFrameworkCore\AuditLoggingDbContext.cs" />
+		<Compile Remove="EntityFrameworkCore\IAuditLoggingDbContext.cs" />
+	</ItemGroup>
+
+	<ItemGroup>
+		<PackageReference Include="Volo.Abp.AuditLogging.EntityFrameworkCore"  />
+		<PackageReference Include="Volo.Abp.EntityFrameworkCore" />
+		<ProjectReference Include="..\Syrna.AuditLogging.Domain\Syrna.AuditLogging.Domain.csproj" />
+	</ItemGroup>
+
+</Project>

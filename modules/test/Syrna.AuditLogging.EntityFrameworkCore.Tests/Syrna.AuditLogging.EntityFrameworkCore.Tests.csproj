@@ -1,0 +1,17 @@
+<Project Sdk="Microsoft.NET.Sdk">
+
+  <PropertyGroup>
+    <TargetFramework>net9.0</TargetFramework>
+    <RootNamespace>Syrna.AuditLogging</RootNamespace>
+  </PropertyGroup>
+
+  <ItemGroup>
+    <ProjectReference Include="..\..\..\demos\MainDemo\src\Syrna.AuditLogging.MainDemo.EntityFrameworkCore\Syrna.AuditLogging.MainDemo.EntityFrameworkCore.csproj" />
+    <ProjectReference Include="..\..\src\Syrna.AuditLogging.EntityFrameworkCore\Syrna.AuditLogging.EntityFrameworkCore.csproj" />
+    <ProjectReference Include="..\Syrna.AuditLogging.TestBase\Syrna.AuditLogging.TestBase.csproj" />
+    <PackageReference Include="Microsoft.NET.Test.Sdk" />
+    <PackageReference Include="Microsoft.EntityFrameworkCore.Proxies" />
+    <PackageReference Include="Volo.Abp.EntityFrameworkCore.Sqlite" />
+  </ItemGroup>
+
+</Project>

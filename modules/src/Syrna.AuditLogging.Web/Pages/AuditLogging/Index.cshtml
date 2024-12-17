@@ -1,0 +1,71 @@
+﻿@page
+@using Microsoft.AspNetCore.Authorization
+@using Microsoft.Extensions.Localization
+@using Syrna.AuditLogging.Localization
+@using Syrna.AuditLogging.Web.Menus
+@using Syrna.AuditLogging.Web.Pages.AuditLogging
+@using Volo.Abp.AspNetCore.Mvc.UI.Layout
+@using Volo.Abp.AspNetCore.Mvc.UI.Theme.Shared.Pages.Shared.Components.AbpPageToolbar
+@model Syrna.AuditLogging.Web.Pages.AuditLogging.IndexModel
+@inject IStringLocalizer<AuditLoggingResource> L
+
+@inject IAuthorizationService Authorization
+@inject IPageLayout PageLayout
+@{
+    PageLayout.Content.Title = L["AuditLogs"].Value;
+    PageLayout.Content.BreadCrumb.Add(L["Menu:AuditLogging"].Value);
+    PageLayout.Content.MenuItemName = AuditLoggingMenus.Logging;
+}
+@section Styles{
+    @* <abp-style-bundle name="@Select2ThemeBundles.Styles.Global"/> *@
+    <abp-style-bundle name="@nameof(IndexModel)">
+        <abp-style src="/Pages/AuditLogging/description.css" />
+        <abp-style src="/libs/bootstrap-daterangepicker/daterangepicker.css" />
+    </abp-style-bundle>
+}
+@section Scripts{
+    <abp-script src="/Pages/AuditLogging/index.js"></abp-script>
+    <abp-script src="/libs/moment/moment.min.js" />
+    <abp-script src="/libs/moment/locales.min.js" />
+    <abp-script src="/libs/bootstrap-daterangepicker/daterangepicker.js"></abp-script>
+}
+<abp-card id="AuditLogsWrapper">
+    <abp-card-header>
+        <abp-row>
+            <abp-column size-md="_6">
+                <abp-card-title>@L["AuditLogs"]</abp-card-title>
+            </abp-column>
+            <abp-column size-md="_6" class="text-end">
+                @await Component.InvokeAsync(typeof(AbpPageToolbarViewComponent), new { pageName = typeof(IndexModel).FullName })
+            </abp-column>
+        </abp-row>
+    </abp-card-header>
+    <abp-card-body>
+            <div class="row">
+                <div class="col">
+                    <select class="form-control" id="search_httpMethod" >
+                        <option selected></option>
+                        <option value="GET">GET</option>
+                        <option value="POST">POST</option>
+                        <option value="PATCH">PATCH</option>
+                        <option value="DELETE">DELETE</option>
+                    </select>
+                </div>
+                <div class="col">
+                    <input class="form-control" id="search_url"  placeholder="@L["Placeholder", L["Url"]]"/>
+                </div>
+                <div class="col">
+                    <input class="form-control" id="search_httpStatusCode" placeholder="@L["Placeholder", L["HttpStatusCode"]]" />
+                </div>
+                <div class="col">
+                    <input class="form-control" id="search_date" />
+                </div>
+                <div class="col">
+                    <button class="btn btn-primary" id="search">@L["Search"]</button>
+                    <button class="btn btn-primary" id="reset">@L["Reset"]</button>
+                </div>
+        </div>
+        <abp-table striped-rows="true" class="nowrap"></abp-table>
+    </abp-card-body>
+</abp-card>
+

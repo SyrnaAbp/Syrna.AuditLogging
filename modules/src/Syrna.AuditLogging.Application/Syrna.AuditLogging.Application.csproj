@@ -1,0 +1,19 @@
+﻿<Project Sdk="Microsoft.NET.Sdk">
+
+	<Import Project="..\..\..\common.props" />
+	<Import Project="..\..\..\configureawait.props" />
+	<Import Project="..\..\..\packing.props" />
+
+	<PropertyGroup>
+		<TargetFramework>net9.0</TargetFramework>
+		<RootNamespace>Syrna.AuditLogging</RootNamespace>
+	</PropertyGroup>
+
+	<ItemGroup>
+		<PackageReference Include="Volo.Abp.AutoMapper" />
+		<PackageReference Include="Volo.Abp.Ddd.Application" />
+		<ProjectReference Include="..\Syrna.AuditLogging.Application.Contracts\Syrna.AuditLogging.Application.Contracts.csproj" />
+		<ProjectReference Include="..\Syrna.AuditLogging.Domain\Syrna.AuditLogging.Domain.csproj" />
+	</ItemGroup>
+
+</Project>
