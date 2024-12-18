@@ -258,6 +258,7 @@ namespace Syrna.AuditLogging.MainDemo.Blazor.Server.Host
             app.UseAbpOpenIddictValidation();
             app.UseAuthorization();
             app.UseSwagger();
+            app.UseAuditing();
             app.UseAbpSwaggerUI(options =>
             {
                 options.SwaggerEndpoint("/swagger/v1/swagger.json", "AuditLogging API");

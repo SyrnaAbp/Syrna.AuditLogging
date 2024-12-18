@@ -32,6 +32,13 @@ An abp application module that allows users to send private messages to each oth
 
 ## Usage
 
+![Audit Logs](docs/images/AuditLogs.png)
+
+![Details Base Info](docs/images/Details_BaseInfo.png)
+
+![Details Action Info](docs/images/Details_ActionInfo.png)
+
+![Audit Logs Filtered](docs/images/AuditLogs_Filtered.png)
 
 ## Reference
 
@@ -42,6 +49,9 @@ An abp application module that allows users to send private messages to each oth
 1. Demo project created for OpenIddict
 2. Demo project extended modules added
 3. Blazor modules added
-4. AuditList sorting applied
-5. 
+4. AuditList sorting applied for blazor UI
+5. AuditList filtering applied for blazor UI
+6. Added ImpersonatorTenantName property for blazor UI
+7. Added ImpersonatorUserName property for blazor UI
+8. Refactored IAuditLogAppService
 
