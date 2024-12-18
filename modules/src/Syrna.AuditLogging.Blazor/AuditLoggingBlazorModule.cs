@@ -1,9 +1,11 @@
 ﻿using Microsoft.Extensions.DependencyInjection;
+using Syrna.AuditLogging.Blazor.Menus;
 using Volo.Abp.AspNetCore.Components.Web.Theming;
 using Volo.Abp.AspNetCore.Components.Web.Theming.Routing;
 using Volo.Abp.AutoMapper;
 using Volo.Abp.BlazoriseUI;
 using Volo.Abp.Modularity;
+using Volo.Abp.UI.Navigation;
 
 namespace Syrna.AuditLogging.Blazor
 {
@@ -29,11 +31,11 @@ namespace Syrna.AuditLogging.Blazor
             {
                 options.AddMaps<AuditLoggingBlazorModule>(validate: true);
             });
-            
-            //Configure<AbpNavigationOptions>(options =>
-            //{
-            //    options.MenuContributors.Add(new AuditLoggingMenuContributor());
-            //});
+
+            Configure<AbpNavigationOptions>(options =>
+            {
+                options.MenuContributors.Add(new AuditLoggingMenuContributor());
+            });
 
             Configure<AbpRouterOptions>(options =>
             {

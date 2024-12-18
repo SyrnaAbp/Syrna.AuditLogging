@@ -6,26 +6,28 @@ using Microsoft.AspNetCore.Authorization;
 using Syrna.AuditLogging.Dtos;
 using Syrna.AuditLogging.Permissions;
 using Volo.Abp.Application.Dtos;
+using Volo.Abp.Application.Services;
 using Volo.Abp.AuditLogging;
 
 namespace Syrna.AuditLogging
 {
     [Authorize(AuditLoggingPermissions.AuditLogs.Default)]
-    public class AuditLogAppService : AuditLoggingAppService, IAuditLogAppService
+    public class AuditLogAppService : ReadOnlyAppService<AuditLog, AuditLogListDto, Guid, GetAuditLogsInput>, IAuditLogAppService
     {
         private IAuditLogRepository LogRepository { get; }
 
-        public AuditLogAppService(IAuditLogRepository logRepository)
+        public AuditLogAppService(IAuditLogRepository logRepository) : base(logRepository)
         {
             LogRepository = logRepository;
         }
 
-        public virtual async Task<PagedResultDto<AuditLogListDto>> GetListAsync(GetAuditLogsInput input)
+        public override async Task<PagedResultDto<AuditLogListDto>> GetListAsync(GetAuditLogsInput input)
         {
             await NormalizeMaxResultCountAsync(input);
 
             var queryable = await LogRepository.GetQueryableAsync();
             var tempQuery = queryable
+                .WhereIf(!input.Filtering.IsNullOrEmpty(), input.Filtering)
                 .WhereIf(!input.HttpMethod.IsNullOrEmpty(), l => l.HttpMethod.Equals(input.HttpMethod))
                 .WhereIf(!input.Url.IsNullOrEmpty(), l => l.Url.Contains(input.Url))
                 .WhereIf(input.HttpStatusCode.HasValue, l => l.HttpStatusCode == input.HttpStatusCode.Value)

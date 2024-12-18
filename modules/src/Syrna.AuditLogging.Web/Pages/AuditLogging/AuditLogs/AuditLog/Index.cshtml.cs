@@ -1,4 +1,4 @@
-namespace Syrna.AuditLogging.Web.Pages.AuditLogging;
+namespace Syrna.AuditLogging.Web.Pages.AuditLogging.AuditLogs.AuditLog;
 
 public class IndexModel : AuditLoggingPageModel
 {

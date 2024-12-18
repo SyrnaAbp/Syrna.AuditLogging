@@ -1,0 +1,141 @@
+﻿@using Syrna.AuditLogging.Localization
+@inject AbpBlazorMessageLocalizerHelper<AuditLoggingResource> LH
+@inherits Volo.Abp.AspNetCore.Components.AbpComponentBase
+<Modal @ref="DetailsModalRef" Closing="@ClosingDetailsModal">
+    <ModalContent Centered="true" Size="ModalSize.Large">
+        <ModalHeader>
+            <ModalTitle>@L["Detail"]</ModalTitle>
+            <CloseButton Clicked="CloseDetailsModalAsync" />
+        </ModalHeader>
+        <ModalBody>
+            <Card>
+                <CardHeader>@L["BaseInfo"]</CardHeader>
+                <CardBody>
+                    <Table>
+                        <TableRow>
+                            <TableRowCell>
+                                <Label>@L["ApplicationName"]</Label>
+                                <TextEdit Text="@DetailsEntity.ApplicationName" Disabled="true" />
+                            </TableRowCell>
+                            <TableRowCell>
+                                <Label>@L["Url"]</Label>
+                                <TextEdit Text="@DetailsEntity.Url" Disabled="true" />
+                            </TableRowCell>
+                            <TableRowCell>
+                                <Label>@L["HttpMethod"]</Label>
+                                <TextEdit Text="@DetailsEntity.HttpMethod" Disabled="true" />
+                            </TableRowCell>
+                        </TableRow>
+                        <TableRow>
+                            <TableRowCell>
+                                <Label>@L["TenantName"]</Label>
+                                <TextEdit Text="@DetailsEntity.TenantName" Disabled="true" />
+                            </TableRowCell>
+                            <TableRowCell>
+                                <Label>@L["UserName"]</Label>
+                                <TextEdit Text="@DetailsEntity.UserName" Disabled="true" />
+                            </TableRowCell>
+                            <TableRowCell>
+                                <Label>@L["ClientIpAddress"]</Label>
+                                <TextEdit Text="@DetailsEntity.ClientIpAddress" Disabled="true" />
+                            </TableRowCell>
+                        </TableRow>
+                        <TableRow>
+                            <TableRowCell>
+                                <Label>@L["ImpersonatorTenantName"]</Label>
+                                <TextEdit Text="@DetailsEntity.ImpersonatorTenantName" Disabled="true" />
+                            </TableRowCell>
+                            <TableRowCell>
+                                <Label>@L["ImpersonatorUserName"]</Label>
+                                <TextEdit Text="@DetailsEntity.ImpersonatorUserName" Disabled="true" />
+                            </TableRowCell>
+                            <TableRowCell>
+                            </TableRowCell>
+                        </TableRow>
+                        <TableRow>
+                            <TableRowCell>
+                                <Label>@L["ExecutionTime"]</Label>
+                                <DateEdit Date="@DetailsEntity.ExecutionTime" InputMode="DateInputMode.DateTime" Disabled="true" />
+                            </TableRowCell>
+                            <TableRowCell>
+                                <Label>@L["ExecutionDuration"]</Label>
+                                <NumericEdit Value="@DetailsEntity.ExecutionDuration" Disabled="true" />
+                            </TableRowCell>
+                            <TableRowCell>
+                                <Label>@L["HttpStatusCode"]</Label>
+                                <NumericEdit Value="@DetailsEntity.HttpStatusCode" Disabled="true" />
+                            </TableRowCell>
+                        </TableRow>
+                        <TableRow>
+                            <TableRowCell ColumnSpan="3">
+                                <Label>@L["BrowserInfo"]</Label>
+                                <TextEdit Text="@DetailsEntity.BrowserInfo" Disabled="true" />
+                            </TableRowCell>
+                        </TableRow>
+                        <TableRow>
+                            <TableRowCell ColumnSpan="3">
+                                <Label>@L["Comments"]</Label>
+                                <TextEdit Text="@DetailsEntity.Comments" Disabled="true" />
+                            </TableRowCell>
+                        </TableRow>
+                        <TableRow>
+                            <TableRowCell ColumnSpan="3">
+                                <Label>@L["Exceptions"]</Label>
+                                <TextEdit Text="@DetailsEntity.Exceptions" Disabled="true" />
+                            </TableRowCell>
+                        </TableRow>
+                    </Table>
+                </CardBody>
+            </Card>
+            <Card>
+                <CardHeader>@L["ActionInfo"]</CardHeader>
+                <CardBody>
+                    @if (DetailsEntity.Actions != null)
+                    {
+                        <Table Striped Bordered Hoverable>
+                            @foreach (var action in DetailsEntity.Actions)
+                            {
+                                <TableRow>
+                                    <TableRowHeader>@(DetailsEntity.Actions.IndexOf(action)+1)</TableRowHeader>
+                                    <TableRowCell>
+                                        <Table>
+                                            <TableRow>
+                                                <TableRowCell>
+                                                    <Label>@L["ServiceName"]</Label>
+                                                    <TextEdit Text="@action.ServiceName" Disabled="true" />
+                                                </TableRowCell>
+                                                <TableRowCell>
+                                                    <Label>@L["MethodName"]</Label>
+                                                    <TextEdit Text="@action.MethodName" Disabled="true" />
+                                                </TableRowCell>
+                                            </TableRow>
+                                            <TableRow>
+                                                <TableRowCell>
+                                                    <Label>@L["ExecutionTime"]</Label>
+                                                    <DateEdit Date="@action.ExecutionTime" InputMode="DateInputMode.DateTime" Disabled="true" />
+                                                </TableRowCell>
+                                                <TableRowCell>
+                                                    <Label>@L["ExecutionDuration"]</Label>
+                                                    <NumericEdit Value="@action.ExecutionDuration" Disabled="true" />
+                                                </TableRowCell>
+                                            </TableRow>
+                                            <TableRow>
+                                                <TableRowCell ColumnSpan="2">
+                                                    <Label>@L["Parameters"]</Label>
+                                                    <TextEdit Text="@action.Parameters" Disabled="true" />
+                                                </TableRowCell>
+                                            </TableRow>
+                                        </Table>
+                                    </TableRowCell>
+                                </TableRow>
+                            }
+                        </Table>
+                    }
+                </CardBody>
+            </Card>
+        </ModalBody>
+        <ModalFooter>
+            <Button Color="Color.Default" Clicked="CloseDetailsModalAsync">@L["Cancel"]</Button>
+        </ModalFooter>
+    </ModalContent>
+</Modal>

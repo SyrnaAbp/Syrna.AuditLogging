@@ -1,0 +1,37 @@
+﻿@page "/AuditLogging/AuditLogs/AuditLog"
+@using Syrna.AuditLogging.Blazor.Components
+@using Syrna.AuditLogging.Dtos
+@using Syrna.AuditLogging.Localization
+@using Syrna.AuditLogging.Permissions
+@using Volo.Abp.BlazoriseUI.Components
+@using Microsoft.AspNetCore.Authorization
+@using Volo.Abp.AspNetCore.Components.Web.Theming.Layout
+@inject AbpBlazorMessageLocalizerHelper<AuditLoggingResource> LH
+
+@attribute [Authorize(AuditLoggingPermissions.AuditLogs.Default)]
+@inherits AbpReadOnlyPageBase<IAuditLogAppService, AuditLogListDto,Guid, GetAuditLogsInput>
+<Card>
+    <CardHeader>
+        @* ************************* PAGE HEADER ************************* *@
+        <PageHeader Title="@L["Menu:AuditLog"]"
+                    BreadcrumbItems="@BreadcrumbItems"
+                    Toolbar="@Toolbar">
+        </PageHeader>
+    </CardHeader>
+    <CardBody>
+        @* ************************* DATA GRID ************************* *@
+        <PmExtensibleDataGrid TItem="AuditLogListDto"
+                              Data="@Entities"
+                              ReadData="@OnDataGridReadAsync"
+                              TotalItems="@TotalCount"
+                              ShowPager="true"
+                              PageSize="@PageSize"
+                              CurrentPage="@CurrentPage" Responsive
+                              Columns="@AuditLogTableColumns">
+        </PmExtensibleDataGrid>
+    </CardBody>
+</Card>
+@if (HasDetailsPermission)
+{
+    <DetailsModal @ref="DetailsModalRef"></DetailsModal>
+}

@@ -24,7 +24,7 @@ An abp application module that allows users to send private messages to each oth
     * Syrna.AuditLogging.Blazor.Server
     * Syrna.AuditLogging.Blazor.WebAssembly
 
-1. Add `DependsOn(typeof(AuditLoggingXxxModule))` attribute to configure the module dependencies. ([see how](https://github.com/SyrnaAbp/SyrnaAbpGuide/blob/master/docs/How-To.md#add-module-dependencies))
+1. Add `DependsOn(typeof(SyrnaAuditLoggingXxxModule))` attribute to configure the module dependencies. ([see how](https://github.com/SyrnaAbp/SyrnaAbpGuide/blob/master/docs/How-To.md#add-module-dependencies))
 
 1. Add `builder.ConfigureAuditLogging();` to the `OnModelCreating()` method in **MyProjectMigrationsDbContext.cs**.
 
@@ -32,29 +32,16 @@ An abp application module that allows users to send private messages to each oth
 
 ## Usage
 
-![image](https://github.com/user-attachments/assets/21542443-f968-4b77-b455-1a5ffbc636a6)
-
-![image](https://github.com/user-attachments/assets/0186f775-aaf7-474d-9167-8d797016d2ea)
-
-![image](https://github.com/user-attachments/assets/8a836c03-e565-4294-8bd9-22d0a2264d88)
-
-![image](https://github.com/user-attachments/assets/2b8578d3-28f6-4bdf-b7a9-878588ad1963)
-
-![image](https://github.com/user-attachments/assets/93132215-7b90-418a-a717-b2a127a80ccf)
-
-![image](https://github.com/user-attachments/assets/639c720b-b6ac-41bd-8df3-50128d65bab5)
 
 ## Reference
 
-### This project based on [EasyAbp AuditLogging](https://github.com/EasyAbp/AuditLogging)
+### This project based on [SuperAbp AuditLogging](https://github.com/SuperAbp/AuditLogging)
 
 ### Differences
 
 1. Demo project created for OpenIddict
 2. Demo project extended modules added
 3. Blazor modules added
-4. Inbox sorting appliyed
-5. Outbox sorting applyed
-6. Added create button to Toolbar dropdown menu
-7. Added ReadTime to Outbox 
+4. AuditList sorting applied
+5. 
 
