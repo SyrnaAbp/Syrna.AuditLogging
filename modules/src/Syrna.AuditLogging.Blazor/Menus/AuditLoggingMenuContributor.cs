@@ -3,7 +3,7 @@ using System.Threading.Tasks;
 using Volo.Abp.UI.Navigation;
 using Syrna.AuditLogging.Localization;
 
-namespace Syrna.AuditLogging.Web.Menus;
+namespace Syrna.AuditLogging.Blazor.Menus;
 
 public class AuditLoggingMenuContributor : IMenuContributor
 {

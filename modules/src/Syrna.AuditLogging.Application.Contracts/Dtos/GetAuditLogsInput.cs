@@ -5,12 +5,13 @@ using Volo.Abp.Application.Dtos;
 
 namespace Syrna.AuditLogging.Dtos
 {
-    public class GetAuditLogsInput : PagedAndSortedResultRequestDto
+    public class GetAuditLogsInput : PagedAndSortedResultRequestDto, IFiltering
     {
         public string HttpMethod { get; set; }
         public string Url { get; set; }
         public int? HttpStatusCode { get; set; }
         public DateTime? StartDate { get; set; }
         public DateTime? EndDate { get; set; }
+        public string Filtering { get; set; }
     }
 }

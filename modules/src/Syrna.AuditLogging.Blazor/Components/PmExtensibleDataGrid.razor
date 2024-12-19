@@ -12,11 +12,13 @@
           PageSize="@PageSize"
           Responsive="@Responsive"
           Striped
-          Class="@Class">
+          Class="@Class"
+          Filterable
+          FilterMode="DataGridFilterMode.Menu">
     <LoadingTemplate>
         <Row Class="w-100 align-items-center" Style="height: 150px;">
             <Column>
-               <RadarSpinner />
+                <RadarSpinner />
             </Column>
         </Row>
     </LoadingTemplate>
@@ -74,7 +76,7 @@
                     {
                         @if (column.ValueConverter == null)
                         {
-                            <DataGridColumn TItem="TItem" Field="@column.Data" Width="@column.Width" Caption="@column.Title" Sortable="@column.Sortable" DisplayFormat="@column.DisplayFormat" DisplayFormatProvider="@column.DisplayFormatProvider" Displayable="column.Visible" >
+                            <DataGridColumn TItem="TItem" Field="@column.Data" Width="@column.Width" Caption="@column.Title" Sortable="@column.Sortable" DisplayFormat="@column.DisplayFormat" DisplayFormatProvider="@column.DisplayFormatProvider" Displayable="column.Visible">
                                 <DisplayTemplate>
                                     @RenderCustomTableColumnComponent(column.Component, context!)
                                 </DisplayTemplate>
@@ -82,7 +84,7 @@
                         }
                         else
                         {
-                            <DataGridColumn TItem="TItem" Field="@column.Data" Width="@column.Width"  Caption="@column.Title" Sortable="@column.Sortable" Displayable="column.Visible">
+                            <DataGridColumn TItem="TItem" Field="@column.Data" Width="@column.Width" Caption="@column.Title" Sortable="@column.Sortable" Displayable="column.Visible">
                                 <DisplayTemplate>
                                     @RenderCustomTableColumnComponent(column.Component, context!)
                                 </DisplayTemplate>
@@ -95,14 +97,50 @@
                         {
                             @if (column.ValueConverter == null)
                             {
-                                <DataGridColumn TItem="TItem"
-                                                Field="@column.Data"
-                                                Width="@column.Width"
-                                                Caption="@column.Title"
-                                                Sortable="@column.Sortable"
-                                                DisplayFormat="@column.DisplayFormat"
-                                                DisplayFormatProvider="@column.DisplayFormatProvider"
-                                                Displayable="column.Visible"/>
+                                @if (GetColumnType(column.Data) == "Regular")
+                                {
+                                    <DataGridColumn TItem="TItem"
+                                                    Field="@column.Data"
+                                                    Width="@column.Width"
+                                                    Caption="@column.Title"
+                                                    Sortable="@column.Sortable"
+                                                    DisplayFormat="@column.DisplayFormat"
+                                                    DisplayFormatProvider="@column.DisplayFormatProvider"
+                                                    Displayable="column.Visible" />
+                                }
+                                @if (GetColumnType(column.Data) == "Numeric")
+                                {
+                                    <DataGridNumericColumn TItem="TItem"
+                                                           Field="@column.Data"
+                                                           Width="@column.Width"
+                                                           Caption="@column.Title"
+                                                           Sortable="@column.Sortable"
+                                                           DisplayFormat="@column.DisplayFormat"
+                                                           DisplayFormatProvider="@column.DisplayFormatProvider"
+                                                           Displayable="column.Visible" />
+                                }
+                                @if (GetColumnType(column.Data) == "Check")
+                                {
+                                    <DataGridCheckColumn TItem="TItem"
+                                                         Field="@column.Data"
+                                                         Width="@column.Width"
+                                                         Caption="@column.Title"
+                                                         Sortable="@column.Sortable"
+                                                         DisplayFormat="@column.DisplayFormat"
+                                                         DisplayFormatProvider="@column.DisplayFormatProvider"
+                                                         Displayable="column.Visible" />
+                                }
+                                @if (GetColumnType(column.Data) == "Date")
+                                {
+                                    <DataGridDateColumn TItem="TItem"
+                                                        Field="@column.Data"
+                                                        Width="@column.Width"
+                                                        Caption="@column.Title" 
+                                                        Sortable="@column.Sortable"
+                                                        DisplayFormat="@column.DisplayFormat"
+                                                        DisplayFormatProvider="@column.DisplayFormatProvider"
+                                                        Displayable="column.Visible" />
+                                }
                             }
                             else
                             {
@@ -128,13 +166,13 @@
                                         var propertyValue = entity?.GetProperty(propertyName);
                                         if (propertyValue != null && propertyValue.GetType() == typeof(bool))
                                         {
-                                            if ((bool) propertyValue)
+                                            if ((bool)propertyValue)
                                             {
-                                                <Icon class="text-success" Name="IconName.Check"/>
+                                                <Icon class="text-success" Name="IconName.Check" />
                                             }
                                             else
                                             {
-                                                <Icon class="text-danger" Name="IconName.Times"/>
+                                                <Icon class="text-danger" Name="IconName.Times" />
                                             }
                                         }
                                         else
@@ -165,7 +203,7 @@
         }
         @if (!AutoGenerateColumns)
         {
-            <DataGridColumn Displayable="false"/>
+            <DataGridColumn Displayable="false" />
         }
     </DataGridColumns>
 </DataGrid>

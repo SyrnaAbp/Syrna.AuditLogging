@@ -4,7 +4,7 @@
     var _auditLoggingAppService = syrna.auditLogging.auditLog;
 
     var _detailModal = new abp.ModalManager({
-        viewUrl: abp.appPath + 'AuditLogging/DetailModal'
+        viewUrl: abp.appPath + 'AuditLogging/AuditLogs/AuditLog/DetailModal'
     });
 
     var _dataTable = null;

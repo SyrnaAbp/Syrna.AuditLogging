@@ -1,27 +1,22 @@
 ﻿using System;
 using System.Threading.Tasks;
 using Syrna.AuditLogging.Dtos;
-using Volo.Abp.Application.Dtos;
 using Volo.Abp.Application.Services;
 
 namespace Syrna.AuditLogging
 {
     /// <summary>
-    /// 日志管理
+    /// Log management
     /// </summary>
-    public interface IAuditLogAppService : IApplicationService
+    public interface IAuditLogAppService : IReadOnlyAppService<
+        AuditLogListDto,
+        Guid,
+        GetAuditLogsInput>
     {
         /// <summary>
-        /// 分页
+        /// Detail
         /// </summary>
-        /// <param name="input">查询参数</param>
-        /// <returns></returns>
-        Task<PagedResultDto<AuditLogListDto>> GetListAsync(GetAuditLogsInput input);
-
-        /// <summary>
-        /// 详情
-        /// </summary>
-        /// <param name="id">主键</param>
+        /// <param name="id">Primary key</param>
         /// <returns></returns>
         Task<AuditLogDetailDto> GetDetailAsync(Guid id);
     }

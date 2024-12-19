@@ -9,7 +9,7 @@ using Volo.Abp.Application.Dtos;
 namespace Syrna.AuditLogging
 {
     /// <summary>
-    /// 日志管理
+    /// Log management
     /// </summary>
     [RemoteService(Name = AuditLoggingRemoteServiceConsts.RemoteServiceName)]
     [Area(AuditLoggingRemoteServiceConsts.ModuleName)]
@@ -17,7 +17,7 @@ namespace Syrna.AuditLogging
     [Route("api/audit-logging")]
     public class AuditLogController : AuditLoggingController, IAuditLogAppService
     {
-        protected IAuditLogAppService AuditLogAppService { get; }
+        private IAuditLogAppService AuditLogAppService { get; }
 
         public AuditLogController(IAuditLogAppService auditLogAppService)
         {
@@ -25,25 +25,33 @@ namespace Syrna.AuditLogging
         }
 
         /// <summary>
-        /// 详情
+        /// Detail
         /// </summary>
-        /// <param name="id">主键</param>
+        /// <param name="id">Primary key</param>
         /// <returns></returns>
-        [HttpGet("{id}")]
+        [HttpGet]
+        [Route("{id}")]
         public virtual async Task<AuditLogDetailDto> GetDetailAsync(Guid id)
         {
             return await AuditLogAppService.GetDetailAsync(id);
         }
 
         /// <summary>
-        /// 分页
+        /// Pagination
         /// </summary>
-        /// <param name="input">查询参数</param>
+        /// <param name="input">Query parameter</param>
         /// <returns></returns>
         [HttpGet]
         public virtual async Task<PagedResultDto<AuditLogListDto>> GetListAsync(GetAuditLogsInput input)
         {
             return await AuditLogAppService.GetListAsync(input);
+        }
+
+        [HttpGet]
+        [Route("get-by-id/{id}")]
+        public async Task<AuditLogListDto> GetAsync(Guid id)
+        {
+            return await AuditLogAppService.GetAsync(id);
         }
     }
 }

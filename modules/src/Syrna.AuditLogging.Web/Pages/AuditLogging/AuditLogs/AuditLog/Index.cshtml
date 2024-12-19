@@ -1,12 +1,17 @@
 ﻿@page
 @using Microsoft.AspNetCore.Authorization
+@using Microsoft.AspNetCore.Mvc.TagHelpers
 @using Microsoft.Extensions.Localization
 @using Syrna.AuditLogging.Localization
 @using Syrna.AuditLogging.Web.Menus
-@using Syrna.AuditLogging.Web.Pages.AuditLogging
+@using Syrna.AuditLogging.Web.Pages.AuditLogging.AuditLogs.AuditLog
+@using Volo.Abp.AspNetCore.Mvc.UI.Bootstrap.TagHelpers.Card
+@using Volo.Abp.AspNetCore.Mvc.UI.Bootstrap.TagHelpers.Grid
+@using Volo.Abp.AspNetCore.Mvc.UI.Bootstrap.TagHelpers.Table
+@using Volo.Abp.AspNetCore.Mvc.UI.Bundling.TagHelpers
 @using Volo.Abp.AspNetCore.Mvc.UI.Layout
 @using Volo.Abp.AspNetCore.Mvc.UI.Theme.Shared.Pages.Shared.Components.AbpPageToolbar
-@model Syrna.AuditLogging.Web.Pages.AuditLogging.IndexModel
+@model Syrna.AuditLogging.Web.Pages.AuditLogging.AuditLogs.AuditLog.IndexModel
 @inject IStringLocalizer<AuditLoggingResource> L
 
 @inject IAuthorizationService Authorization
@@ -17,7 +22,6 @@
     PageLayout.Content.MenuItemName = AuditLoggingMenus.Logging;
 }
 @section Styles{
-    @* <abp-style-bundle name="@Select2ThemeBundles.Styles.Global"/> *@
     <abp-style-bundle name="@nameof(IndexModel)">
         <abp-style src="/Pages/AuditLogging/description.css" />
         <abp-style src="/libs/bootstrap-daterangepicker/daterangepicker.css" />

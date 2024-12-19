@@ -11,9 +11,6 @@ public class AuditLoggingApplicationAutoMapperProfile : Profile
         CreateMap<AuditLog, AuditLogListDto>();
         CreateMap<AuditLogAction, AuditLogActionDetailDto>();
         CreateMap<AuditLog, AuditLogDetailDto>()
-            .ForMember(entity => entity.Actions,
-                opt => opt
-                    .MapFrom(src =>
-                        src.Actions));
+            .ForMember(entity => entity.Actions, opt => opt.MapFrom(src => src.Actions));
     }
 }

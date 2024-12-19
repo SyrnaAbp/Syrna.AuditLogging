@@ -10,7 +10,14 @@ public static class LinqExt
     {
         Check.NotNull(query, nameof(query));
         return condition
-            ? DynamicQueryableExtensions.OrderBy(query, sorting)
+            ? query.OrderBy(sorting)
+            : query;
+    }
+    public static IQueryable<T> WhereIf<T>(this IQueryable<T> query, bool condition, string filtering)
+    {
+        Check.NotNull(query, nameof(query));
+        return condition
+            ? query.Where(filtering)
             : query;
     }
 }

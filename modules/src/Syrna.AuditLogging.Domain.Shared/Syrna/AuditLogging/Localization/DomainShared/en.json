@@ -5,6 +5,7 @@
     "ChoosePlaceholder": "ChoosePlaceholder {0}",
     "AuditLogging": "Audit log",
     "AuditLogs": "Audit log",
+    "Menu:AuditLog": "Audit log",
     "Permission:AuditLogging": "Audit log",
     "Permission:AuditLogs": "Audit log",
     "ApplicationName": "Application name",

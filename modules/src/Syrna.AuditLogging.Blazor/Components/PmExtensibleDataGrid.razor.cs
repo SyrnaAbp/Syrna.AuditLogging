@@ -1,5 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Linq;
+using System.Reflection;
 using System.Text.RegularExpressions;
 using Blazorise.DataGrid;
 using Blazorise.Extensions;
@@ -50,6 +52,58 @@ public partial class PmExtensibleDataGrid<TItem> : ComponentBase
             builder.AddAttribute(0, DataFieldAttributeName, data);
             builder.CloseComponent();
         };
+    }
+
+    private List<PropertyInfo> _propertyInfos;
+
+    private string GetColumnType(string name)
+    {
+        _propertyInfos ??= typeof(TItem).GetProperties().ToList();
+
+        var propertyInfo = _propertyInfos.FirstOrDefault(w => w.Name == name);
+        if (propertyInfo == null)
+        {
+            return "Regular";
+        }
+        var propertyInfoPropertyType = propertyInfo.PropertyType;
+        if (propertyInfoPropertyType == typeof(string))
+        {
+            return "Regular";
+        }
+        if (propertyInfoPropertyType == typeof(bool))
+        {
+            return "Check";
+        }
+        if (propertyInfoPropertyType == typeof(byte))
+        {
+            return "Numeric";
+        }
+        if (propertyInfoPropertyType == typeof(int))
+        {
+            return "Numeric";
+        }
+        if (propertyInfoPropertyType == typeof(long))
+        {
+            return "Numeric";
+        }
+        if (propertyInfoPropertyType == typeof(decimal))
+        {
+            return "Numeric";
+        }
+        if (propertyInfoPropertyType == typeof(double))
+        {
+            return "Numeric";
+        }
+        if (propertyInfoPropertyType == typeof(float))
+        {
+            return "Numeric";
+        }
+        if (propertyInfoPropertyType == typeof(DateTime))
+        {
+            return "Date";
+        }
+
+        return "Regular";
     }
 
     protected virtual string GetConvertedFieldValue(TItem item, TableColumn columnDefinition)

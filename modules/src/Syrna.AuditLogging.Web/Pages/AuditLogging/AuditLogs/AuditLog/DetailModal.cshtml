@@ -4,7 +4,7 @@
 @using Syrna.AuditLogging.Localization
 @using Volo.Abp.AspNetCore.Mvc.UI.Bootstrap.TagHelpers.Card
 @using Volo.Abp.AspNetCore.Mvc.UI.Bootstrap.TagHelpers.Modal
-@model Syrna.AuditLogging.Web.Pages.AuditLogging.DetailModalModel
+@model Syrna.AuditLogging.Web.Pages.AuditLogging.AuditLogs.AuditLog.DetailModalModel
 @{
     Layout = null;
 }
@@ -73,18 +73,18 @@
                 </div>
             </div>
         </div>
-            <div class="descriptions-item">
-                <div class="descriptions-item-container">
-                    <span class="descriptions-item-label">@L["BrowserInfo"]</span>
-                    <span class="descriptions-item-content">@Model.AuditLogging.BrowserInfo</span>
-                </div>
+        <div class="descriptions-item">
+            <div class="descriptions-item-container">
+                <span class="descriptions-item-label">@L["BrowserInfo"]</span>
+                <span class="descriptions-item-content">@Model.AuditLogging.BrowserInfo</span>
             </div>
-            <div class="descriptions-item">
-                <div class="descriptions-item-container">
-                    <span class="descriptions-item-label">@L["Comments"]</span>
-                    <span class="descriptions-item-content">@Model.AuditLogging.Comments</span>
-                </div>
+        </div>
+        <div class="descriptions-item">
+            <div class="descriptions-item-container">
+                <span class="descriptions-item-label">@L["Comments"]</span>
+                <span class="descriptions-item-content">@Model.AuditLogging.Comments</span>
             </div>
+        </div>
         <div class="descriptions-item">
             <div class="descriptions-item-container">
                 <span class="descriptions-item-label">@L["Exceptions"]</span>
@@ -130,7 +130,7 @@
                             <span class="descriptions-item-content">@action.Parameters</span>
                         </div>
                     </div>
-                    <br/>
+                    <br />
                 }
             </abp-card-body>
         </abp-card>
