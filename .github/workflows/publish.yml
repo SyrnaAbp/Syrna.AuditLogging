@@ -57,6 +57,7 @@ jobs:
           rm -f *.HttpApi.Client.ConsoleTestApp.*
           rm -f *.Tests.*
           rm -f *.TestBase.*
+          rm -f *.MainDemo.*
           ls
 
       - name: dotnet nuget push to GitHub
@@ -76,7 +77,7 @@ jobs:
         with:
           tag: ${{ steps.getVersion.outputs.first_match }}
         env:
-          NUGET_PACKAGE_TOKEN: ${{ secrets.NUGET_PACKAGE_TOKEN }}
+          GITHUB_TOKEN: ${{ secrets.NUGET_PACKAGE_TOKEN }}
 
       - name: add git tag
         if: ${{ steps.checkTag.outputs.exists == 'false' }}
